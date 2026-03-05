@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Kodexempel 3</title>
+		<style>
+			.salmon{
+				background-color: salmon;
+			}
+		</style>
+</head>
+	<body>
+
+		<script type="text/javascript">
+			"use strict"
+
+			function Human(id, name, age, length){
+				this.id = id;
+				this.name = name;
+				this.age = age;
+				this.length = length;
+
+				this.print = function(){
+					document.write("<p id=" + id + ">" + this.name + " | " + this.age + "</p>");
+				}
+			}
+
+			let alexander = new Human("Alexander", 63, 110);
+			console.log(alexander);
+
+
+			var nameList = [
+				"Alexander",
+				"Carl",
+				"Maria",
+				"Pierre",
+				"Katarina",
+				"Peter",
+				"Lisa",
+				"Elin",
+				"Lena",
+                "Sara",
+                "Emma",
+                "Elin",
+                "Sofia",
+                "Maja"
+			];
+
+
+			let arr = [];
+			function createRandomHumans(q){
+				for(let i = 0; i < q; i++){
+					let name = nameList[Math.floor(Math.random() * nameList.length)];
+					let age = Math.floor(Math.random() * 50) + 10;
+					let length = Math.floor(Math.random() * 140) + 60;
+
+					let h = new Human(i, name, age, length);
+					arr.push(h);
+					h.print();
+				}
+			}
+
+
+			createRandomHumans(5);
+		
+		</script>
+	</body>
+</html>
