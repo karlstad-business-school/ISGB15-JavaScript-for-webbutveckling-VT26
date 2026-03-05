@@ -1,38 +1,91 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Kodexempel 2</title>
+
+<head>
+	<title>Kodexempel 2</title>
 </head>
-	<body>
 
-		<script type="text/javascript">
-			"use strict"
+<body>
 
-
-			
+	<script type="text/javascript">
+		"use strict"
 
 
+		let human = {
+			name: "Carl",
+			age: 36,
+			height: 190,
+
+			setName: function (name) {
+				this.name = name;
+			},
+
+			getName: function () {
+				return this.name;
+			}
+		};
+
+		console.log(human);
+
+		human.setName("Alexander");
+		console.log(human.name);
+		console.log(human);
 
 
+		var nameList = [
+			"Alexander",
+			"Carl",
+			"Maria",
+			"Pierre",
+			"Katarina",
+			"Peter",
+			"Lisa",
+			"Elin",
+			"Lena",
+			"Sara",
+			"Emma",
+			"Elin",
+			"Sofia",
+			"Maja"
+		];
+
+		function Human(id, name, age, length) {
+			this.id = id;
+			this.name = name;
+			this.age = age;
+			this.length = length;
+
+			this.print = function () {
+				document.write("<p id=" + this.id + ">" + name + " | " + this.age + "</p>");
+			}
+		}
+
+		let johan = new Human(-1, "Johan", 65, 100);
+		console.log(johan);
 
 
+		let arr = [];
+		function createRandomHuman(count) {
+			for (let i = 0; i < count; i++) {
+				//console.log(i);
+				let randomIndex = Math.floor(Math.random() * nameList.length);
+				let name = nameList[randomIndex];
+				let age = Math.floor(Math.random() * 50) + 10;
+				let length = Math.floor(Math.random() * 140) + 60;
 
-			var nameList = [
-				"Alexander",
-				"Carl",
-				"Maria",
-				"Pierre",
-				"Katarina",
-				"Peter",
-				"Lisa",
-				"Elin",
-				"Lena",
-                "Sara",
-                "Emma",
-                "Elin",
-                "Sofia",
-                "Maja"
-			];
-		</script>
-	</body>
+				let h = new Human(i, name, age, length);
+				arr.push(h);
+
+				h.print();
+
+			}
+		}
+
+
+		createRandomHuman(5);
+
+
+	</script>
+</body>
+
 </html>

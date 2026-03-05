@@ -1,67 +1,116 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Kodexempel 3</title>
-		<style>
-			.salmon{
-				background-color: salmon;
-			}
-		</style>
+
+<head>
+	<title>Kodexempel 2</title>
+	<style>
+		.salmon {
+			background-color: salmon;
+		}
+	</style>
 </head>
-	<body>
 
-		<script type="text/javascript">
-			"use strict"
+<body>
 
-			function Human(id, name, age, length){
-				this.id = id;
+	<script type="text/javascript">
+		"use strict"
+
+
+		let human = {
+			name: "Carl",
+			age: 36,
+			height: 190,
+
+			setName: function (name) {
 				this.name = name;
-				this.age = age;
-				this.length = length;
+			},
 
-				this.print = function(){
-					document.write("<p id=" + id + ">" + this.name + " | " + this.age + "</p>");
-				}
+			getName: function () {
+				return this.name;
 			}
+		};
 
-			let alexander = new Human("Alexander", 63, 110);
-			console.log(alexander);
+		console.log(human);
 
-
-			var nameList = [
-				"Alexander",
-				"Carl",
-				"Maria",
-				"Pierre",
-				"Katarina",
-				"Peter",
-				"Lisa",
-				"Elin",
-				"Lena",
-                "Sara",
-                "Emma",
-                "Elin",
-                "Sofia",
-                "Maja"
-			];
+		human.setName("Alexander");
+		console.log(human.name);
+		console.log(human);
 
 
-			let arr = [];
-			function createRandomHumans(q){
-				for(let i = 0; i < q; i++){
-					let name = nameList[Math.floor(Math.random() * nameList.length)];
-					let age = Math.floor(Math.random() * 50) + 10;
-					let length = Math.floor(Math.random() * 140) + 60;
+		var nameList = [
+			"Alexander",
+			"Carl",
+			"Maria",
+			"Pierre",
+			"Katarina",
+			"Peter",
+			"Lisa",
+			"Elin",
+			"Lena",
+			"Sara",
+			"Emma",
+			"Elin",
+			"Sofia",
+			"Maja"
+		];
 
-					let h = new Human(i, name, age, length);
-					arr.push(h);
-					h.print();
-				}
+		function Human(id, name, age, length) {
+			this.id = id;
+			this.name = name;
+			this.age = age;
+			this.length = length;
+
+			this.print = function () {
+				document.write("<p id=" + this.id + ">" + name + " | " + this.age + "</p>");
 			}
+		}
+
+		let johan = new Human(-1, "Johan", 65, 100);
+		console.log(johan);
 
 
-			createRandomHumans(5);
-		
-		</script>
-	</body>
+		let arr = [];
+		function createRandomHuman(count) {
+			for (let i = 0; i < count; i++) {
+				//console.log(i);
+				let randomIndex = Math.floor(Math.random() * nameList.length);
+				let name = nameList[randomIndex];
+				let age = Math.floor(Math.random() * 50) + 10;
+				let length = Math.floor(Math.random() * 140) + 60;
+
+				let h = new Human(i, name, age, length);
+				arr.push(h);
+
+				h.print();
+
+			}
+		}
+
+
+		createRandomHuman(5);
+
+		let p = document.getElementById("1");
+		p.setAttribute("class", "salmon");
+
+		console.log(arr);
+
+
+		let idToRemove = 2;
+		let pWithId = document.getElementById(idToRemove);
+		//#2
+		//let pWithId2 = document.querySelector("#" + idToRemove);
+
+		pWithId.remove();
+
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i].id === idToRemove) {
+				arr.splice(i, 1);
+			}
+		}
+
+		console.log(arr);
+
+	</script>
+</body>
+
 </html>
