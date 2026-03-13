@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="sv">
+	<head>
+        <meta charset="utf-8" /> 
+        <title>
+			JavaScript för webbutveckling ISGB15 - Funktioner	
+        </title>	
+	</head>
+	<body>
+		<div>
+            <p>ByVal och ByRef demo</p>
+        </div>
+
+		<script>
+		
+			"use strict";
+			
+			//Funktion med inkommande värden (byVal) 
+			function byValDemo( code, name ) {
+				code = 'ISGA11';
+				name = 'HTML och CSS för webbutveckling';
+			}
+			
+			//Funktion med inkommande objekt (byRef) 
+			function byRefDemo( oCourseData ) {
+				oCourseData.courseCode = 'ISGA11';
+				oCourseData.courseName = 'HTML och CSS för webbutveckling'
+			}
+
+			//'Huvudprogrammet'
+			let courseCode = 'ISGB15';
+			let courseName = "JavaScript för webbutveckling";
+
+			console.log('Före byValDemo()', courseCode, courseName);
+			byValDemo( courseCode, courseName );
+			console.log('Efter byValDemo()', courseCode, courseName);
+
+			let courseData = {
+				courseCode : 'ISGB15',
+				courseName : 'JavaScript för webbutveckling'
+			};
+
+			console.log('Före byRefDemo()', courseData.courseCode, courseData.courseName);
+			
+			byRefDemo( courseData );
+
+			console.log('Efter byRefDemo()', courseData.courseCode, courseData.courseName);
+
+		</script>
+		
+    </body>
+</html>

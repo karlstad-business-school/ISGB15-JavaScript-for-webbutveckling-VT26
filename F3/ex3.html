@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<title>
+			JavaScript för webbutveckling ISGB15 - Object Literal
+		</title>
+		<meta charset="utf-8" /> 
+	</head>
+
+	<body>
+
+		<div id="allDices"></div>
+
+		<script>
+			
+			'use strict';
+			
+            let sixDices = {
+				
+				dices : Array(),
+
+				throwSixDices : function() {
+
+					for(let i=0; i < 6; i++) {
+						this.dices[i] = Math.floor( (Math.random() * 6) + 1 );
+					}
+				},
+
+				printSixDices : function() {
+
+					let allDices = '';
+					for(let i=0; i < 6; i++) {
+						allDices += '<p>' + this.dices[i] + '</p>';
+					}
+
+					return allDices;
+
+				}
+				
+            };
+
+			//'Huvudprogrammet'
+			sixDices.throwSixDices();
+			let allDices = sixDices.printSixDices();
+			document.querySelector('#allDices').innerHTML = allDices;
+			
+		</script>
+		
+	</body>
+</html>

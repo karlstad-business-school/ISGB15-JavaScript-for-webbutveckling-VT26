@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<title>
+			JavaScript för webbutveckling ISGB15 - Objekt med Class
+		</title>
+		<meta charset="utf-8" /> 
+	</head>
+
+	<body>
+		
+		<script>
+			
+			'use strict';
+			//För den som vill gräva i OO i JS sök på prototype!
+
+			class MyDate extends window.Date {
+
+				/*
+					constructor() {
+						super();
+					}
+				*/
+
+				svDate() {
+					return this.toLocaleDateString();
+				}
+
+			}
+
+			//'Huvudprogrammet'
+			let newDate = new MyDate();
+			console.log( newDate.svDate() );
+
+		</script>
+		
+	</body>
+
+
+</html>
