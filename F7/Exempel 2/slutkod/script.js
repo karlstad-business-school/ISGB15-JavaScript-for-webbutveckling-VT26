@@ -10,11 +10,18 @@ window.addEventListener('load', prepareGame);
 function prepareGame() {
 
     //ToDo:
+
     //Gömma spelplan
+    document.getElementById('gameArea').classList.add('hidden');
+
     //Skapa element som kan klickas
+    let target = document.createElement('div');
     //Lägg på klassen "target" (rundade hörn mm)
+    target.classList.add('target');
     //Lägg in element i gamArea
+    document.getElementById('gameArea').appendChild(target);
     //Lägg lyssnare på  startknapp (länk)
+    document.querySelector('a.mybtn').addEventListener('click', startGame);
     
 }
 
@@ -23,10 +30,21 @@ function startGame() {
     //ToDo:
 
     //Visa gameArea
+    document.getElementById('gameArea').classList.remove('hidden');
     //Sätt startvärden i gameobj
+    oGame.score=0;
+    oGame.time=11;
+    
     //Skriv ut startvärden
+    document.querySelector('#score').textContent = 'Score: ' + oGame.score;
+    document.getElementById('time').textContent = 'Time remaining: ' + oGame.time;
     //Ropa på moveTarget
+    moveTarget();
+
+    //Sätt interval
+    oGame.intervalId  = setInterval(moveTarget, 2000);
     //lägg på lyssnare på target
+    document.querySelector('.target').addEventListener('click', updateScore);
     
 }
 
