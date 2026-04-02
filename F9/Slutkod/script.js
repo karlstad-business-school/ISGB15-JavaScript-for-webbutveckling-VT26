@@ -1,6 +1,5 @@
 'use strict';
 
-
 //F9
 /*
 Din uppgift är att modifiera tabellen som finns i index.html. 
@@ -18,12 +17,17 @@ Krav:
 
 
 let oData = {
-    time : 1000,
-    timerId : null,
-    h1Ref : document.querySelector("div h1"),
+    time: 1000,
+    timerId: null,
+    h1Ref: document.querySelector("div h1"),
     tableRef: document.querySelector("table"),
 };
 
+
+
+window.addEventListener("load", function(){
+    createColumns(oData.tableRef);
+});
 
 
 
@@ -33,7 +37,25 @@ Funktionen ska sedan gå igenom alla tabellrader (TR) och lägga till en ny cell
 Summan ska ni få fram genom funktionen sumOfAllCellsInARow(). 
 Cellen med summan ska ha en bakgrundsfärg av ”lightblue” samt en ”font-weight” av ”bold”
 */
-function createColumns(tableNodeRef) {}
+function createColumns(tableNodeRef) {
+    let trRefs = tableNodeRef.querySelectorAll("tr");
+
+    for(let i = 0; i < trRefs.length; i++){
+        let tr = trRefs[i];
+        
+        let sum = sumOfAllCellsInARow(tr);
+
+        let td = document.createElement("td");
+        let tdText = document.createTextNode(sum);
+
+        td.appendChild(tdText);
+        tr.appendChild(td);
+
+        td.style.fontWeight = "bold";
+        td.style.backgroundColor = "lightblue";
+    }
+    
+}
 
 
 
@@ -45,6 +67,22 @@ Till sist ska ni returerna den totalt summan av hela raden.
 */
 function sumOfAllCellsInARow(trNodeRef) {
     let sum = 0;
+    let tdRefs = trNodeRef.querySelectorAll("td");
+
+    for(let i = 0; i < tdRefs.length; i++){
+        let td = tdRefs[i];
+        //console.log(td);
+        //console.log(td.firstChild);
+        //console.log(td.firstChild.nodeValue);
+        
+        if(td.firstChild == null || td.firstChild.nodeValue.trim() == "" || isNaN(td.firstChild.nodeValue)){
+            td.style.backgroundColor = "red";
+        }else{
+            sum += parseInt(td.firstChild.nodeValue);
+        }
+
+
+    }
 
     return sum;
 }
@@ -59,3 +97,30 @@ Om användaren trycker på en cell ska du sätta texten i H1-taggen till cellens
 Du ska också starta en timer som sätter tillbaka texten till ”Table” efter en sekund (värdet på time i oData). 
 Du ska också stänga av timern ifall en användare trycker på en ny cell.
 */
+/*
+let oData = {
+    time: 1000,
+    timerId: null,
+    h1Ref: document.querySelector("div h1"),
+    tableRef: document.querySelector("table"),
+};
+
+*/
+
+
+oData.tableRef.addEventListener("click", function(e){
+    if(e.target.nodeName == "TD"){
+        if(e.target.firstChild == null){
+            oData.h1Ref.firstChild.nodeValue = "";
+        }else{
+            oData.h1Ref.firstChild.nodeValue = e.target.firstChild.nodeValue;
+        }
+
+        clearTimeout(oData.timerId);
+        oData.timerId = setTimeout(function(){
+            oData.h1Ref.firstChild.nodeValue = "Table";
+        }, oData.time);
+
+        
+    }
+});
