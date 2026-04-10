@@ -29,7 +29,87 @@
 
 
     <script>
+
+        /*
+            <div class="message">
+                <span>TestUser</span>
+                <span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus numquam iste dolor rem
+                    fugit repudiandae explicabo necessitatibus.</span>
+                <span>2026-4-8</span>
+            </div>
+        */
         
+        function createMessage(author, msg){
+            let container = document.createElement("div");
+            container.setAttribute("class", "message");
+
+            let name = document.createElement("span");
+            name.textContent = author;
+
+            let text = document.createElement("span");
+            let textNode = document.createTextNode(msg);
+            text.appendChild(textNode);
+
+            let date = document.createElement("span");
+
+            let dateObject = new Date();
+            let year = dateObject.getFullYear();
+            let month = (dateObject.getMonth() + 1);
+            let day = dateObject.getDate();
+            let currentDate = year + "-" + month + "-" + day;
+
+            date.textContent = currentDate;
+    
+            date.firstChild.nodeValue = "test";
+            
+
+            container.appendChild(name);
+            container.appendChild(text);
+            container.appendChild(date);
+
+            console.log(container);
+
+            let messages = document.querySelector("#messages");
+            messages.appendChild(container);
+        }
+
+
+        let intervalId = null;
+
+        window.addEventListener("load", function(){
+            let btn = document.querySelector("#send");
+            btn.addEventListener("click", sendMessage);
+
+
+            let onlineTime = 0;
+            intervalId = setInterval(function(){
+                onlineTime += 1;
+
+                let current = document.getElementById("current-time");
+                if(onlineTime == 1){
+                    current.textContent = "Online for " + onlineTime + " second";
+                }else{
+                    current.textContent = "Online for " + onlineTime + " seconds";
+                }
+                
+            }, 1000);
+        });
+
+    
+
+
+        setTimeout(function(){
+            clearInterval(intervalId);
+        }, 3000);
+        
+
+        function sendMessage(event){
+            event.preventDefault();
+
+            let input = document.querySelector("input");
+            createMessage("Alexander", input.value);
+            input.value = "";
+        }
 
     </script>
 </body>

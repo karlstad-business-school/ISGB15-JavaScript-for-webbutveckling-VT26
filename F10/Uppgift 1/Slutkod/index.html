@@ -15,6 +15,57 @@
     
 
     <script>
+        //5p
+        let data = {
+            words_en: ["Dog", "Cat", "Cow", "Bird"],
+            words_sv: ["Hund", "Katt", "Ko", "Fågel"],
+            user: {
+                score: 0
+            },
+            currentWord: null,
+            currentNumber: -1
+        }
+
+        //4p
+        function newWord(){
+            let number = getRadnomNumberBetween(0, 3);
+            let currentWord = data.words_en[number];
+
+            data.currentWord = currentWord;
+            data.currentNumber = number;
+
+            let p = document.querySelector("p");
+            p.textContent = currentWord;
+        }
+
+        function checkWord(){
+            if(data.currentWord != null && data.currentNumber != -1){
+
+                let input = document.querySelector("input");
+                let word = input.value;
+
+                if(data.words_sv[data.currentNumber] == word){
+                    input.value = "";
+                    data.user.score += 1;
+                    newWord();
+                }else{
+                    data.user.score -= 1;
+                }
+            }
+        }
+
+
+        window.addEventListener("load", function(){
+            newWord();
+
+            let btn = document.querySelector("button");
+            btn.addEventListener("click", function(e){
+                checkWord();
+            })
+
+            //btn.addEventListener("click", checkWord());
+        });
+
     
         //Slumpat tal mellan X och Y
         //getRandomNumberBetween(3, 6) => kan få 3, 4, 5, 6
